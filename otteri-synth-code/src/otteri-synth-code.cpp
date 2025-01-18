@@ -227,73 +227,84 @@ void setup() {
 
 }
 
-// void updateVals() {
-//     for (int i = 0; i < 3; i++) {
-//         envelope1[i].attack(attackAmp[i]);
-//         envelope1[i].decay(decayAmp[i]);
-//         envelope1[i].sustain(sustainAmp[i]);
-//         envelope1[i].release(releaseAmp[i]);
-//         envelope2[i].attack(attackAmp[i]);
-//         envelope2[i].decay(decayAmp[i]);
-//         envelope2[i].sustain(sustainAmp[i]);
-//         envelope2[i].release(releaseAmp[i]);
-//         envelopeFilter1[i].attack(attackFilter[i]);
-//         envelopeFilter1[i].decay(decayFilter[i]);
-//         envelopeFilter1[i].sustain(sustainFilter[i]);
-//         envelopeFilter1[i].release(releaseFilter[i]);
-//         if (waveforms[0] == 0) {
-//             waveform1[i].begin(waveformsArray[0]);
-//         } else if (waveforms[0] == 1) {
-//             waveform1[i].begin(waveformsArray[1]);
-//         } else if (waveforms[0] == 2) {
-//             waveform1[i].begin(waveformsArray[2]);
-//         } else if (waveforms[0] == 3) {
-//             waveform1[i].begin(waveformsArray[3]);
-//         } else if (waveforms[0] == 4) {
-//             waveform1[i].begin(waveformsArray[4]);
-//         }
-//         waveform1[i].amplitude(1.0);
-//         waveform1[i].pulseWidth(pulseWidth[0]);
-//         if (waveforms[1] == 0) {
-//             waveform2[i].begin(waveformsArray[0]);
-//         } else if (waveforms[1] == 1) {
-//             waveform2[i].begin(waveformsArray[1]);
-//         } else if (waveforms[1] == 2) {
-//             waveform2[i].begin(waveformsArray[2]);
-//         } else if (waveforms[1] == 3) {
-//             waveform2[i].begin(waveformsArray[3]);
-//         } else if (waveforms[1] == 4) {
-//             waveform2[i].begin(waveformsArray[4]);
-//         }
-//         waveform2[i].amplitude(1.0);
-//         waveform2[i].pulseWidth(pulseWidth[1]);
-//         if (waveforms[2] == 0) {
-//             waveform3[i].begin(waveformsArray[0]);
-//         } else if (waveforms[2] == 1) {
-//             waveform3[i].begin(waveformsArray[1]);
-//         } else if (waveforms[2] == 2) {
-//             waveform3[i].begin(waveformsArray[2]);
-//         } else if (waveforms[2] == 3) {
-//             waveform3[i].begin(waveformsArray[3]);
-//         } else if (waveforms[2] == 4) {
-//             waveform3[i].begin(waveformsArray[4]);
-//         }
-//         waveform3[i].amplitude(1.0);
-//         waveform3[i].pulseWidth(pulseWidth[2]);
-//         ladder1[i].frequency(cutoff[i]);
-//         ladder1[i].octaveControl(filterAmount[i]);
-//         ladder1[i].resonance(resonance[i]);
-//         ladder2[i].frequency(cutoff[i]);
-//         ladder2[i].octaveControl(filterAmount[i]);
-//         ladder2[i].resonance(resonance[i]);
-//         mixer1[i].gain(0, max(0, (-pan[0] + 100.0) * 0.005) * (volume[0] / 100.0) * 0.33);
-//         mixer1[i].gain(1, max(0, (-pan[1] + 100.0) * 0.005) * (volume[1] / 100.0) * 0.33);
-//         mixer1[i].gain(2, max(0, (-pan[2] + 100.0) * 0.005) * (volume[2] / 100.0) * 0.33);
-//         mixer2[i].gain(0, max(0, (pan[0] + 100.0) * 0.005) * (volume[0] / 100.0) * 0.33);
-//         mixer2[i].gain(1, max(0, (pan[1] + 100.0) * 0.005) * (volume[1] / 100.0) * 0.33);
-//         mixer2[i].gain(2, max(0, (pan[2] + 100.0) * 0.005) * (volume[2] / 100.0) * 0.33);
-//     }
-// }
+void updateVals() {
+    Serial.println("Update values started");
+    for (int i = 0; i < 1; i++) {
+        Serial.println("Voice: " + String(i));
+        envelope1[i].attack(attackAmp[i]);
+        envelope1[i].decay(decayAmp[i]);
+        envelope1[i].sustain(sustainAmp[i]);
+        envelope1[i].release(releaseAmp[i]);
+        envelope2[i].attack(attackAmp[i]);
+        envelope2[i].decay(decayAmp[i]);
+        envelope2[i].sustain(sustainAmp[i]);
+        envelope2[i].release(releaseAmp[i]);
+        Serial.println("envelopes done");
+        envelopeFilter1[i].attack(attackFilter[i]);
+        envelopeFilter1[i].decay(decayFilter[i]);
+        envelopeFilter1[i].sustain(sustainFilter[i]);
+        envelopeFilter1[i].release(releaseFilter[i]);
+        Serial.println("filter envelopes done");
+        if (waveforms[0] == 0) {
+            waveform1[i].begin(waveformsArray[0]);
+        } else if (waveforms[0] == 1) {
+            waveform1[i].begin(waveformsArray[1]);
+        } else if (waveforms[0] == 2) {
+            waveform1[i].begin(waveformsArray[2]);
+        } else if (waveforms[0] == 3) {
+            waveform1[i].begin(waveformsArray[3]);
+        } else if (waveforms[0] == 4) {
+            waveform1[i].begin(waveformsArray[4]);
+        }
+        Serial.println("waveform1 done");
+        waveform1[i].amplitude(1.0);
+        waveform1[i].pulseWidth(pulseWidth[0]);
+        if (waveforms[1] == 0) {
+            waveform2[i].begin(waveformsArray[0]);
+        } else if (waveforms[1] == 1) {
+            waveform2[i].begin(waveformsArray[1]);
+        } else if (waveforms[1] == 2) {
+            waveform2[i].begin(waveformsArray[2]);
+        } else if (waveforms[1] == 3) {
+            waveform2[i].begin(waveformsArray[3]);
+        } else if (waveforms[1] == 4) {
+            waveform2[i].begin(waveformsArray[4]);
+        }
+        waveform2[i].amplitude(1.0);
+        waveform2[i].pulseWidth(pulseWidth[1]);
+        Serial.println("waveform2 done");
+        if (waveforms[2] == 0) {
+            waveform3[i].begin(waveformsArray[0]);
+        } else if (waveforms[2] == 1) {
+            waveform3[i].begin(waveformsArray[1]);
+        } else if (waveforms[2] == 2) {
+            waveform3[i].begin(waveformsArray[2]);
+        } else if (waveforms[2] == 3) {
+            waveform3[i].begin(waveformsArray[3]);
+        } else if (waveforms[2] == 4) {
+            waveform3[i].begin(waveformsArray[4]);
+        }
+        waveform3[i].amplitude(1.0);
+        waveform3[i].pulseWidth(pulseWidth[2]);
+        Serial.println("waveform3 done");
+
+        ladder1[i].frequency(cutoff[i]);
+        ladder1[i].octaveControl(filterAmount[i]);
+        ladder1[i].resonance(resonance[i]);
+        ladder2[i].frequency(cutoff[i]);
+        ladder2[i].octaveControl(filterAmount[i]);
+        ladder2[i].resonance(resonance[i]);
+        Serial.println("ladder done");
+        mixer1[i].gain(0, max(0, (-pan[0] + 100.0) * 0.005) * (volume[0] / 100.0) * 0.33);
+        mixer1[i].gain(1, max(0, (-pan[1] + 100.0) * 0.005) * (volume[1] / 100.0) * 0.33);
+        mixer1[i].gain(2, max(0, (-pan[2] + 100.0) * 0.005) * (volume[2] / 100.0) * 0.33);
+        mixer2[i].gain(0, max(0, (pan[0] + 100.0) * 0.005) * (volume[0] / 100.0) * 0.33);
+        mixer2[i].gain(1, max(0, (pan[1] + 100.0) * 0.005) * (volume[1] / 100.0) * 0.33);
+        mixer2[i].gain(2, max(0, (pan[2] + 100.0) * 0.005) * (volume[2] / 100.0) * 0.33);
+        Serial.println("mixer done");
+    }
+    Serial.println("Update values done");
+}
 
 
 void presetSelect() {
@@ -895,6 +906,7 @@ void presetSelect() {
         waveforms[2] = 0;
     }
     // updateVals();
+    Serial.println("Preset now selected: " + String(presetSelected));
 }
 
 void playSound(int note) {
@@ -938,10 +950,8 @@ void checkNotes() {
     // // then act on them
     if (buttons[0].fallingEdge()) {
         playSound(12 * octave + transpose);
-        Serial.println("Button 1: " + String(buttons[0].fallingEdge()));
     } else if (buttons[0].risingEdge()) {
         stopSound(12 * octave + transpose);
-        Serial.println("Button 1: " + String(buttons[0].risingEdge()));
     }
 
     if (buttons[1].fallingEdge()) {
