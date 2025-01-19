@@ -10,7 +10,7 @@
 For fun I wanted to create a synthesizer that looks like an otter. It should be my daughters firsth synth :)
 
 # Design
-As the baseline I generated an image using DALL-E and fed it into [TRELLIS](https://huggingface.co/JeffreyXiang/TRELLIS-image-large).
+As the base I generated an image using DALL-E and fed it into [TRELLIS](https://huggingface.co/JeffreyXiang/TRELLIS-image-large).
 I was able to create an image in DALL-E that exactly matched what I had in mind.
 
 <img src=".attachements/generated-otter-synth.webp" alt="Otteri DALL-E Image" width="300" height="300">
