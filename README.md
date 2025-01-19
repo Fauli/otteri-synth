@@ -25,19 +25,22 @@ I then adopted the generated mesh to my liking and needs.
 
 ## Case
 
-Once I had a design that was happy with, I printed a small prototype.
-After a successful initial print, I scaled it up and started to add the electronics.
+The initial prototype was small, but after confirming its success, I scaled up the design to accommodate robust electronics suitable for a child's enthusiastic use. 
 
 <img src=".attachements/prototype-closed.jpg" alt="Otteri DALL-E Image" width="400" height="300">
 <img src=".attachements/prototype-open.jpg" alt="Otteri DALL-E Image" width="400" height="300">
 
-Because my young daughter will likel smash hard on the controls, I decided to go with arcade buttons.
+I opted for durable arcade buttons to withstand frequent interaction.
 
 <img src=".attachements/scaled-up-first-time.jpg" alt="Otteri DALL-E Image" width="400" height="300">
 
 ## Microcontroller
 
-I'm using a [Teensy 3.2](https://www.pjrc.com/store/teensy32.html) with the [Teensy Audio Shield](https://www.pjrc.com/store/teensy3_audio.html) as I still had them laying around at home.
+The core of the Otteri-synth is powered by a [Teensy 3.2](https://www.pjrc.com/store/teensy32.html) with the [Teensy Audio Shield](https://www.pjrc.com/store/teensy3_audio.html) as I still had them laying around at home.
+
+The Teensy is excellent for synthesizer projects due to its high-performance ARM Cortex-M4 processor and real-time audio processing capabilities,
+
+I'm a big fan of the teensy boards!
 
 ## Amplifier
 
@@ -45,15 +48,14 @@ Another component I still had laying around at home was an [Adafruit MAX7944](ht
 
 ## Wiring diagram
 
-todo..
-
+*Coming soon...*
 
 # Software
-Initially I started with the basic .ino coding in Arduino IDE. But as the code gre, I decided to migrate to [PlatformIO](https://platformio.org/).
 
-The code can be found in the otteri-synth-code folder.
+The project began with basic sketches in the Arduino IDE, but as the software evolved, I transitioned to [PlatformIO](https://platformio.org/) for enhanced code management and scalability.
 
+The complete codebase is available in the `otteri-synth-code` directory.
 
 # Demo
 
-todo..
+*Coming soon...*
