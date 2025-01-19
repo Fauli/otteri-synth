@@ -19,7 +19,7 @@ I was able to create an image in DALL-E that exactly matched what I had in mind.
 TRELLIS created an amazing mesh out of it that I could directly use as a starting point in [Blender](https://www.blender.org/).
 You can find and download the mesh [here](.attachements/otteri-synth-generated.glb).
 
-I then adopted the generated mesh to my liking and needs.
+I then adapted the generated mesh to my liking and needs.
 
 # Hardware
 
