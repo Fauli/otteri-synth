@@ -33,6 +33,8 @@ After a successful initial print, I scaled it up and started to add the electron
 
 Because my young daughter will likel smash hard on the controls, I decided to go with arcade buttons.
 
+<img src=".attachements/scaled-up-first-time.jpg" alt="Otteri DALL-E Image" width="400" height="300">
+
 ## Microcontroller
 
 I'm using a [Teensy 3.2](https://www.pjrc.com/store/teensy32.html) with the [Teensy Audio Shield](https://www.pjrc.com/store/teensy3_audio.html) as I still had them laying around at home.
