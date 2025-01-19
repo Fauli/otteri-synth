@@ -63,19 +63,25 @@
 #define NOTE_AS8 (7458.62)
 #define NOTE_B8 (7902.13)
 
+void playNote(int noteIndex);
+void stopNote();
+void changeToPreset(int preset);
+
 // Audio library components
 AudioSynthWaveform waveform1;     // Waveform generator
 AudioSynthWaveform waveform2;     // Waveform generator
+AudioSynthWaveform waveform3;     // Waveform generator
 AudioMixer4 mixer1;               // Mixer to combine waveforms
 AudioEffectEnvelope envelope1;    // Envelope generator
 AudioFilterStateVariable filter1; // Filter to modify the waveform
 AudioOutputI2S i2s1;              // Audio output over I2S
 AudioConnection patchCord1(waveform1, 0, mixer1, 0);
 AudioConnection patchCord2(waveform2, 0, mixer1, 1);
-AudioConnection patchCord3(mixer1, envelope1);
-AudioConnection patchCord4(envelope1, 0, filter1, 0);
-AudioConnection patchCord5(filter1, 0, i2s1, 0);
-AudioConnection patchCord6(filter1, 0, i2s1, 1);
+AudioConnection patchCord3(waveform3, 0, mixer1, 2);
+AudioConnection patchCord4(mixer1, envelope1);
+AudioConnection patchCord5(envelope1, 0, filter1, 0);
+AudioConnection patchCord6(filter1, 0, i2s1, 0);
+AudioConnection patchCord7(filter1, 0, i2s1, 1);
 
 AudioControlSGTL5000 sgtl5000_1; // Control chip for I2S
 
@@ -89,6 +95,12 @@ Bounce buttons[numButtons] = {
 float notes[numButtons - 1] = {NOTE_C5, NOTE_D5, NOTE_E5, NOTE_F5, NOTE_G5, NOTE_A5, NOTE_B5, NOTE_C6};
 int currentPreset = 0;
 
+/**
+ * @brief Setup function for the synth .
+ * 
+ * Initializes the serial communication, audio memory, audio control, and buttons.
+ * Sets up the default waveform and envelope settings.
+ */
 void setup() {
     Serial.begin(9600);
     AudioMemory(15);
@@ -102,38 +114,129 @@ void setup() {
         buttons[i].interval(5);
     }
 
-    filter1.frequency(500); // Default filter frequency
-
-    waveform1.begin(WAVEFORM_SINE);
-    waveform1.amplitude(0.9);
-
-    waveform2.begin(WAVEFORM_SAWTOOTH);
-    waveform2.amplitude(0.9);
-
-    envelope1.attack(50);
-    envelope1.decay(120);
-    envelope1.sustain(0.7);
-    envelope1.release(250);
+    changeToPreset(currentPreset);
 
     filter1.resonance(0.5); // Slightly resonant
 
-    Serial.println("Setup complete. Default waveform: Sine.");
+    Serial.println("Setup complete. Default waveform set.");
 }
 
+/**
+ * @brief Changes the waveform and envelope settings based on the selected preset.
+ * 
+ * Configures `waveform1`, `waveform2`, and `waveform3` to specific waveforms and amplitude settings. 
+ * Adjusts the `envelope1` parameters such as attack, decay, sustain, and release based on the chosen preset. 
+ * Each preset corresponds to a unique configuration and is logged to the Serial console.
+ *
+ * @param preset The index of the preset configuration to apply.
+ */
+void changeToPreset(int preset) {
+    switch (preset) {
+    case 0:
+        Serial.println("Sine");
+        waveform1.begin(WAVEFORM_SINE);
+        waveform1.amplitude(0.9);
+        waveform2.begin(WAVEFORM_SAWTOOTH);
+        waveform2.amplitude(0.9);
+        waveform3.begin(WAVEFORM_PULSE);
+        waveform3.amplitude(0.9);
+
+        envelope1.attack(50);
+        envelope1.decay(120);
+        envelope1.sustain(0.7);
+        envelope1.release(250);
+
+        break;
+    case 1:
+        Serial.println("Square");
+        waveform1.begin(WAVEFORM_SQUARE);
+        waveform1.amplitude(0.9);
+        waveform2.begin(WAVEFORM_SQUARE);
+        waveform2.amplitude(0.9);
+        waveform3.begin(WAVEFORM_TRIANGLE);
+        waveform3.amplitude(0.9);
+        envelope1.attack(100);
+        envelope1.decay(120);
+        envelope1.sustain(0.7);
+        envelope1.release(500);
+
+        break;
+    case 2:
+        Serial.println("Sawtooth");
+        waveform1.begin(WAVEFORM_SAWTOOTH);
+        waveform1.amplitude(0.9);
+        waveform2.begin(WAVEFORM_SAWTOOTH);
+        waveform2.amplitude(0.9);
+        waveform3.begin(WAVEFORM_PULSE);
+        waveform3.amplitude(0.9);
+        envelope1.attack(0);
+        envelope1.decay(4);
+        envelope1.sustain(0.5);
+        envelope1.release(10);
+
+        break;
+    case 3:
+        Serial.println("Triangle");
+        waveform1.begin(WAVEFORM_TRIANGLE);
+        waveform1.amplitude(0.9);
+        waveform2.begin(WAVEFORM_SAWTOOTH);
+        waveform2.amplitude(0.9);
+        waveform3.begin(WAVEFORM_PULSE);
+        waveform3.amplitude(0.9);
+        break;
+    case 4:
+        Serial.println("Pulse");
+        waveform1.begin(WAVEFORM_PULSE);
+        waveform1.amplitude(0.9);
+        waveform2.begin(WAVEFORM_PULSE);
+        waveform1.amplitude(0.9);
+        waveform3.begin(WAVEFORM_PULSE);
+        waveform1.amplitude(0.9);
+        break;
+    }
+}
+
+/**
+ * @brief Plays a musical note with slight detuning.
+ * 
+ * Sets frequencies for three waveform generators based on a note index.
+ *
+ * @param noteIndex Index of the note in the `notes` array, determining the base frequency.
+ */
+void playNote(int noteIndex) {
+    waveform1.frequency(notes[noteIndex] * pow(2, -1 / 1200.0) * pow(2, random(-2, 3) / 1200.0));
+    waveform2.frequency(notes[noteIndex] * pow(2, 1 / 1200.0) * pow(2, random(-2, 3) / 1200.0));
+    waveform3.frequency(notes[noteIndex] * pow(2, 2 / 1200.0) * pow(2, random(-2, 3) / 1200.0));
+
+    envelope1.noteOn();
+
+    Serial.print("Note played: ");
+    Serial.println(notes[noteIndex]);
+}
+
+/**
+ * @brief Stops the currently playing note.
+ * 
+ * Deactivates the sound by turning off `envelope1` and logs the action to the Serial console.
+ */
+void stopNote() {
+    envelope1.noteOff();
+    Serial.println("Note stopped.");
+}
+
+/**
+ * @brief Main program loop.
+ * 
+ * Runs the main program infinitely, checking for button presses and releases.
+ */
 void loop() {
     for (int i = 0; i < numButtons - 1; ++i) {
         buttons[i].update();
         if (buttons[i].fell()) {
-            waveform1.frequency(notes[i]);
-            waveform2.frequency(notes[i]+5);
-            envelope1.noteOn();
-
-            Serial.print("Note played: ");
-            Serial.println(notes[i]);
+            playNote(i);
         }
         if (buttons[i].rose()) {
-            envelope1.noteOff();
-            Serial.println("Note stopped.");
+            stopNote();
         }
     }
 
@@ -142,28 +245,9 @@ void loop() {
     if (buttons[3].fell()) {
         currentPreset = (currentPreset + 1) % 5;
         Serial.print("Preset changed to: ");
-        switch (currentPreset) {
-        case 0:
-            waveform1.begin(WAVEFORM_SINE);
-            Serial.println("Sine");
-            break;
-        case 1:
-            waveform1.begin(WAVEFORM_SQUARE);
-            Serial.println("Square");
-            break;
-        case 2:
-            waveform1.begin(WAVEFORM_SAWTOOTH);
-            Serial.println("Sawtooth");
-            break;
-        case 3:
-            waveform1.begin(WAVEFORM_TRIANGLE);
-            Serial.println("Triangle");
-            break;
-        case 4:
-            waveform1.begin(WAVEFORM_ARBITRARY);
-            Serial.println("Arbitrary");
-            break;
-        }
+        Serial.print(currentPreset);
+        changeToPreset(currentPreset);
+
         // Make sure the filter frequency is set appropriately for the preset
         filter1.frequency(5000 - currentPreset * 1000);
     }
