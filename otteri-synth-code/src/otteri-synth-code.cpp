@@ -1,11 +1,6 @@
 #include <Audio.h>
 #include <Bounce2.h>
 
-// Function prototypes
-void playNote(int noteIndex);
-void stopNote();
-void changeToPreset(int preset);
-
 // define notes
 const double NOTE_C4 = 261.63;
 const double NOTE_CS4 = 277.18;
@@ -68,7 +63,10 @@ const double NOTE_A8 = 7040.00;
 const double NOTE_AS8 = 7458.62;
 const double NOTE_B8 = 7902.13;
 
-
+// Function declarations
+void playNote(int noteIndex);
+void stopNote();
+void changeToPreset(int preset);
 
 // Audio library components
 AudioSynthWaveform waveform1;     // Waveform generator
@@ -89,19 +87,17 @@ AudioConnection patchCord7(filter1, 0, i2s1, 1);
 AudioControlSGTL5000 sgtl5000_1; // Control chip for I2S
 
 // Button setup
-const int numButtons = 10;
+const int numButtons = 9;
 Bounce buttons[numButtons] = {
     Bounce(0, 5), Bounce(1, 5), Bounce(2, 5), Bounce(3, 5),
-    Bounce(4, 5), Bounce(5, 5), Bounce(8, 5), Bounce(21, 5),
-    Bounce(20, 5), Bounce(17, 5)};
-    // Bounce[8] 20 is instrument switch
-    // Bounce[9] 17 is octave switch & volume control
+    Bounce(4, 5), Bounce(5, 5), Bounce(6, 5), Bounce(7, 5),
+    Bounce(21, 5)};
 
-float notes[numButtons - 2] = {NOTE_C5, NOTE_D5, NOTE_E5, NOTE_F5, NOTE_G5, NOTE_A5, NOTE_B5, NOTE_C6};
+float notes[numButtons - 1] = {NOTE_C5, NOTE_D5, NOTE_E5, NOTE_F5, NOTE_G5, NOTE_A5, NOTE_B5, NOTE_C6};
 int currentPreset = 0;
 
 /**
- * @brief Setup function for the synth .
+ * @brief Setup function for the synthesizer.
  * 
  * Initializes the serial communication, audio memory, audio control, and buttons.
  * Sets up the default waveform and envelope settings.
@@ -110,7 +106,7 @@ void setup() {
     Serial.begin(9600);
     AudioMemory(15);
     sgtl5000_1.enable();
-    sgtl5000_1.volume(0.75);
+    sgtl5000_1.volume(0.4);
 
     // Initialize buttons
     for (int i = 0; i < numButtons; ++i) {
@@ -235,7 +231,7 @@ void stopNote() {
  * Runs the main program infinitely, checking for button presses and releases.
  */
 void loop() {
-    for (int i = 0; i < numButtons - 2; ++i) {
+    for (int i = 0; i < numButtons - 1; ++i) {
         buttons[i].update();
         if (buttons[i].fell()) {
             playNote(i);
@@ -252,11 +248,5 @@ void loop() {
         Serial.print("Preset changed to: ");
         Serial.print(currentPreset);
         changeToPreset(currentPreset);
-    }
-
-        // Check for preset change
-    buttons[9].update();
-    if (buttons[9].fell()) {
-        Serial.print("Would now change the octave, needs to be implemented");
     }
 }
