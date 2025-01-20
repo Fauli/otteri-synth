@@ -1,71 +1,74 @@
 #include <Audio.h>
 #include <Bounce2.h>
 
-// Define notes
-#define NOTE_C4 (261.63)
-#define NOTE_CS4 (277.18)
-#define NOTE_D4 (293.66)
-#define NOTE_DS4 (311.13)
-#define NOTE_E4 (329.63)
-#define NOTE_F4 (349.23)
-#define NOTE_FS4 (369.99)
-#define NOTE_G4 (392.00)
-#define NOTE_GS4 (415.30)
-#define NOTE_A4 (440.00)
-#define NOTE_AS4 (466.16)
-#define NOTE_B4 (493.88)
-#define NOTE_C5 (523.25)
-#define NOTE_CS5 (554.37)
-#define NOTE_D5 (587.33)
-#define NOTE_DS5 (622.25)
-#define NOTE_E5 (659.25)
-#define NOTE_F5 (698.46)
-#define NOTE_FS5 (739.99)
-#define NOTE_G5 (783.99)
-#define NOTE_GS5 (830.61)
-#define NOTE_A5 (880.00)
-#define NOTE_AS5 (932.33)
-#define NOTE_B5 (987.77)
-#define NOTE_C6 (1046.50)
-#define NOTE_CS6 (1108.73)
-#define NOTE_D6 (1174.66)
-#define NOTE_DS6 (1244.51)
-#define NOTE_E6 (1318.51)
-#define NOTE_F6 (1396.91)
-#define NOTE_FS6 (1479.98)
-#define NOTE_G6 (1567.98)
-#define NOTE_GS6 (1661.22)
-#define NOTE_A6 (1760.00)
-#define NOTE_AS6 (1864.66)
-#define NOTE_B6 (1975.53)
-#define NOTE_C7 (2093.00)
-#define NOTE_CS7 (2217.46)
-#define NOTE_D7 (2349.32)
-#define NOTE_DS7 (2489.02)
-#define NOTE_E7 (2637.02)
-#define NOTE_F7 (2793.83)
-#define NOTE_FS7 (2959.96)
-#define NOTE_G7 (3135.96)
-#define NOTE_GS7 (3322.44)
-#define NOTE_A7 (3520.00)
-#define NOTE_AS7 (3729.31)
-#define NOTE_B7 (3951.07)
-#define NOTE_C8 (4186.01)
-#define NOTE_CS8 (4434.92)
-#define NOTE_D8 (4698.63)
-#define NOTE_DS8 (4978.03)
-#define NOTE_E8 (5274.04)
-#define NOTE_F8 (5587.65)
-#define NOTE_FS8 (5919.91)
-#define NOTE_G8 (6271.93)
-#define NOTE_GS8 (6644.88)
-#define NOTE_A8 (7040.00)
-#define NOTE_AS8 (7458.62)
-#define NOTE_B8 (7902.13)
-
+// Function prototypes
 void playNote(int noteIndex);
 void stopNote();
 void changeToPreset(int preset);
+
+// define notes
+const double NOTE_C4 = 261.63;
+const double NOTE_CS4 = 277.18;
+const double NOTE_D4 = 293.66;
+const double NOTE_DS4 = 311.13;
+const double NOTE_E4 = 329.63;
+const double NOTE_F4 = 349.23;
+const double NOTE_FS4 = 369.99;
+const double NOTE_G4 = 392.00;
+const double NOTE_GS4 = 415.30;
+const double NOTE_A4 = 440.00;
+const double NOTE_AS4 = 466.16;
+const double NOTE_B4 = 493.88;
+const double NOTE_C5 = 523.25;
+const double NOTE_CS5 = 554.37;
+const double NOTE_D5 = 587.33;
+const double NOTE_DS5 = 622.25;
+const double NOTE_E5 = 659.25;
+const double NOTE_F5 = 698.46;
+const double NOTE_FS5 = 739.99;
+const double NOTE_G5 = 783.99;
+const double NOTE_GS5 = 830.61;
+const double NOTE_A5 = 880.00;
+const double NOTE_AS5 = 932.33;
+const double NOTE_B5 = 987.77;
+const double NOTE_C6 = 1046.50;
+const double NOTE_CS6 = 1108.73;
+const double NOTE_D6 = 1174.66;
+const double NOTE_DS6 = 1244.51;
+const double NOTE_E6 = 1318.51;
+const double NOTE_F6 = 1396.91;
+const double NOTE_FS6 = 1479.98;
+const double NOTE_G6 = 1567.98;
+const double NOTE_GS6 = 1661.22;
+const double NOTE_A6 = 1760.00;
+const double NOTE_AS6 = 1864.66;
+const double NOTE_B6 = 1975.53;
+const double NOTE_C7 = 2093.00;
+const double NOTE_CS7 = 2217.46;
+const double NOTE_D7 = 2349.32;
+const double NOTE_DS7 = 2489.02;
+const double NOTE_E7 = 2637.02;
+const double NOTE_F7 = 2793.83;
+const double NOTE_FS7 = 2959.96;
+const double NOTE_G7 = 3135.96;
+const double NOTE_GS7 = 3322.44;
+const double NOTE_A7 = 3520.00;
+const double NOTE_AS7 = 3729.31;
+const double NOTE_B7 = 3951.07;
+const double NOTE_C8 = 4186.01;
+const double NOTE_CS8 = 4434.92;
+const double NOTE_D8 = 4698.63;
+const double NOTE_DS8 = 4978.03;
+const double NOTE_E8 = 5274.04;
+const double NOTE_F8 = 5587.65;
+const double NOTE_FS8 = 5919.91;
+const double NOTE_G8 = 6271.93;
+const double NOTE_GS8 = 6644.88;
+const double NOTE_A8 = 7040.00;
+const double NOTE_AS8 = 7458.62;
+const double NOTE_B8 = 7902.13;
+
+
 
 // Audio library components
 AudioSynthWaveform waveform1;     // Waveform generator
@@ -86,13 +89,15 @@ AudioConnection patchCord7(filter1, 0, i2s1, 1);
 AudioControlSGTL5000 sgtl5000_1; // Control chip for I2S
 
 // Button setup
-const int numButtons = 9;
+const int numButtons = 10;
 Bounce buttons[numButtons] = {
     Bounce(0, 5), Bounce(1, 5), Bounce(2, 5), Bounce(3, 5),
-    Bounce(4, 5), Bounce(5, 5), Bounce(6, 5), Bounce(7, 5),
-    Bounce(8, 5)};
+    Bounce(4, 5), Bounce(5, 5), Bounce(8, 5), Bounce(21, 5),
+    Bounce(20, 5), Bounce(17, 5)};
+    // Bounce[8] 20 is instrument switch
+    // Bounce[9] 17 is octave switch & volume control
 
-float notes[numButtons - 1] = {NOTE_C5, NOTE_D5, NOTE_E5, NOTE_F5, NOTE_G5, NOTE_A5, NOTE_B5, NOTE_C6};
+float notes[numButtons - 2] = {NOTE_C5, NOTE_D5, NOTE_E5, NOTE_F5, NOTE_G5, NOTE_A5, NOTE_B5, NOTE_C6};
 int currentPreset = 0;
 
 /**
@@ -230,7 +235,7 @@ void stopNote() {
  * Runs the main program infinitely, checking for button presses and releases.
  */
 void loop() {
-    for (int i = 0; i < numButtons - 1; ++i) {
+    for (int i = 0; i < numButtons - 2; ++i) {
         buttons[i].update();
         if (buttons[i].fell()) {
             playNote(i);
@@ -241,14 +246,17 @@ void loop() {
     }
 
     // Check for preset change
-    buttons[3].update();
-    if (buttons[3].fell()) {
+    buttons[8].update();
+    if (buttons[8].fell()) {
         currentPreset = (currentPreset + 1) % 5;
         Serial.print("Preset changed to: ");
         Serial.print(currentPreset);
         changeToPreset(currentPreset);
+    }
 
-        // Make sure the filter frequency is set appropriately for the preset
-        filter1.frequency(5000 - currentPreset * 1000);
+        // Check for preset change
+    buttons[9].update();
+    if (buttons[9].fell()) {
+        Serial.print("Would now change the octave, needs to be implemented");
     }
 }

@@ -23,6 +23,22 @@ I then adapted the generated mesh to my liking and needs.
 
 # Hardware
 
+Because I have a 3d printer, the case and inner works was specially made for this synth.
+
+## Parts List
+
+Here is a quick overview of the used parts. A detailed description can be found below.
+
+| Part                     | Amount | Description                                      |
+| ------------------------ | ------ | ------------------------------------------------ |
+| 3D Printed Case          | 1      | Custom case to house all components              |
+| Teensy 3.2               | 1      | Microcontroller for handling audio processing    |
+| Teensy Audio Shield      | 1      | Audio processing shield for Teensy               |
+| Adafruit MAX7944         | 1      | Amplifier for driving the speakers               |
+| 4Ohm 3W 40mm Speakers    | 2      | Small speakers for audio output                  |
+| Arcade Buttons           | 10     | Durable buttons for user interaction             |
+| Various Wires            | -      | Wiring for connecting all components             |
+
 ## Case
 
 The initial prototype was small, but after confirming its success, I scaled up the design to accommodate robust electronics suitable for a child's enthusiastic use. 
@@ -42,14 +58,28 @@ The Teensy is excellent for synthesizer projects due to its high-performance ARM
 
 I'm a big fan of the teensy boards!
 
-## Amplifier
+## Amplifier & speakers
 
 Another component I still had laying around at home was an [Adafruit MAX7944](https://www.adafruit.com/product/1752) amplifier. For the speakers size, this will be more then enough.
 
+As speakers I'm using 2 4Ohm 3W 40mm. They might be a little small, but should do the job.
+
 ## Wiring diagram
 
-<img src=".attachements/teensy3-audio-pins.png" alt="Otteri DALL-E Image" width="400" height="300">
+<img src=".attachements/teensy3-audio-pins.png" alt="Otteri DALL-E Image" width="400" height="400">
 
+| Button   | Pin | Description                    |
+| -------- | --- | ------------------------------ |
+| Button 0 | 0   | Play note C                    |
+| Button 1 | 1   | Play note D                    |
+| Button 2 | 2   | Play note E                    |
+| Button 3 | 3   | Play note F                    |
+| Button 4 | 4   | Play note G                    |
+| Button 5 | 5   | Play note A                    |
+| Button 6 | 8   | Play note B                    |
+| Button 7 | 21  | Play note C (octave higher)    |
+| Button 8 | 20  | Change preset (instrument)     |
+| Button 9 | 17  | Change octave (& maybe volume) |
 
 
 *Coming soon...*
