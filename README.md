@@ -48,7 +48,19 @@ Another component I still had laying around at home was an [Adafruit MAX7944](ht
 
 ## Wiring diagram
 
+<img src=".attachements/teensy3-audio-pins.png" alt="Otteri DALL-E Image" width="400" height="300">
+
+
+
 *Coming soon...*
+
+## Putting it all together
+
+<img src=".attachements/initial-quick-test.jpg" alt="Otteri DALL-E Image" width="400" height="300">
+
+
+
+
 
 # Software
 
