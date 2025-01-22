@@ -139,7 +139,7 @@ void setup() {
     Serial.begin(9600);
     AudioMemory(15);
     sgtl5000_1.enable();
-    sgtl5000_1.volume(0.4);
+    sgtl5000_1.volume(0.65);
 
     // Initialize buttons
     for (int i = 0; i < numButtons; ++i) {

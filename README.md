@@ -6,11 +6,31 @@
     Cause otters like to play!
 </p>
 
+## Table of Contents
+
+- [Otteri-synth](#otteri-synth)
+  - [Table of Contents](#table-of-contents)
+- [Introduction](#introduction)
+- [Design](#design)
+- [Hardware](#hardware)
+  - [Parts List](#parts-list)
+  - [Case](#case)
+  - [Microcontroller](#microcontroller)
+  - [Amplifier \& speakers](#amplifier--speakers)
+  - [Wiring diagram](#wiring-diagram)
+  - [Putting it all together](#putting-it-all-together)
+- [Software](#software)
+- [Demo](#demo)
+
+
+
 # Introduction
 For fun I wanted to create a synthesizer that looks like an otter. It should be my daughters firsth synth :)
 
+In these modern times I wanted to leverage what new tools have been available to design this project. In my mind I had a clear vision how the synth should look and play. I never did such a project before, so it was also a learning experience for me.
+
 # Design
-As the base I generated an image using DALL-E and fed it into [TRELLIS](https://huggingface.co/JeffreyXiang/TRELLIS-image-large).
+As the base I generated an image using [DALL-E](https://openai.com/index/dall-e-2/) and fed it into [TRELLIS](https://huggingface.co/JeffreyXiang/TRELLIS-image-large).
 I was able to create an image in DALL-E that exactly matched what I had in mind.
 
 <img src=".attachements/generated-otter-synth.webp" alt="Otteri DALL-E Image" width="300" height="300">
@@ -86,9 +106,19 @@ As speakers I'm using 2 4Ohm 3W 40mm. They might be a little small, but should d
 
 ## Putting it all together
 
+A first prototype was made with a breadboard and some initial buttons I had still at home. The order for the remaining buttons was on it's way.
+
 <img src=".attachements/initial-quick-test.jpg" alt="Otteri DALL-E Image" width="400" height="300">
 
+To fix the plate with the buttons to the body of the synth, I got melt threads in M3 size, like these:
+<img src=".attachements/blender-thread-holes.png" alt="Otteri DALL-E Image" width="400" height="300">
 
+
+In Blender I prepared the matching 4mm holes to fix the threads in.
+<img src=".attachements/m3-melt-thread.png" alt="Otteri DALL-E Image" width="400" height="300">
+
+
+*Coming soon...*
 
 
 
@@ -98,6 +128,9 @@ The project began with basic sketches in the Arduino IDE, but as the software ev
 
 The complete codebase is available in the `otteri-synth-code` directory.
 
+I wanted to have multiple voices, in order to be able to not only play 1 key at a time. This was done by mutiplying the whole virtual audio setup 3 times and defining a common output to i2s.
+
+I'm making heavy use of the [Teensy Audio Library](https://www.pjrc.com/teensy/td_libs_Audio.html) library.
 # Demo
 
 *Coming soon...*
