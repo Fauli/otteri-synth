@@ -18,7 +18,9 @@
   - [Microcontroller](#microcontroller)
   - [Amplifier \& speakers](#amplifier--speakers)
   - [Wiring diagram](#wiring-diagram)
+  - [Final print config](#final-print-config)
   - [Putting it all together](#putting-it-all-together)
+- [KiCad](#kicad)
 - [Software](#software)
 - [Demo](#demo)
 
@@ -101,8 +103,14 @@ As speakers I'm using 2 4Ohm 3W 40mm. They might be a little small, but should d
 | Button 8 | 20  | Change preset (instrument)     |
 | Button 9 | 17  | Change octave (& maybe volume) |
 
-
 *Coming soon...*
+
+## Final print config
+
+I cut the Otter in Bambu Studio, using hexagons dowels with length 2cm and 1.5cm diameter as connectors. Initially I had a small gap between the two pieces. So I manually reduced the length of the dowels.
+
+
+
 
 ## Putting it all together
 
@@ -120,6 +128,40 @@ In Blender I prepared the matching 4mm holes to fix the threads in.
 
 *Coming soon...*
 
+# KiCad
+
+Download Teensy files from:
+
+And add them according to:
+Adding Footprint Libraries (.kicad_mod)
+
+    Open the Footprint Editor: From the main window in KiCad, navigate to Tools > Footprint Editor.
+    Manage Footprint Libraries (Symbol in the opened window):
+        Within the Footprint Editor, go to Preferences > Manage Footprint Libraries....
+        You’ll see two tabs: "Global Libraries" (libraries available to all projects) and "Project Specific Libraries" (libraries only available to the current project).
+        To add a new library, click the “+” button under the appropriate tab.
+        Point the file browser to the directory containing your .kicad_mod files. Select this directory as your library directory and provide a nickname for easy reference.
+        Confirm your addition by clicking "OK".
+
+Step 2: Manage Symbol Libraries
+
+    Access the Library Management:
+        In the Symbol Editor, go to Preferences > Manage Symbol Libraries....
+        This opens the Symbol Libraries Manager where you can add, remove, or modify symbol libraries.
+
+    Add a New Library:
+        Click on the "Project Specific Libraries" tab to add the library only to your current project, or choose the "Global Libraries" tab to add the library to all KiCad projects on your system.
+        Click the ‘+’ button at the bottom of the window to add a new library entry.
+
+    Specify Library Details:
+        Nickname: Enter a nickname for the library. This nickname will be used to reference the library within KiCad.
+        Library Path: Click on the folder icon next to the ‘Library Path’ field to browse to the location where you extracted your .lib file. Select the .lib file.
+        Plugin Type: Ensure the plugin type is set to ‘Legacy’ for .lib files.
+        The .dcm file, if located in the same directory, will automatically be linked for documentation purposes, so there's no need to do anything extra for it.
+
+    Confirm and Close:
+        After entering all details, click “OK” to add the library.
+        Close the Library Manager by clicking "OK" again.
 
 
 # Software
