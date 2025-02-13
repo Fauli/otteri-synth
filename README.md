@@ -214,6 +214,9 @@ Out of the schematics, I was able to create an initial, simple PCB design.
 <img src=".attachements/pcb-front.png" alt="Otteri DALL-E Image" height="300">
 <img src=".attachements/pcb-back.png" alt="Otteri DALL-E Image" height="300">
 
+The files can be downloaded here:
+* [Schematics](.attachements/otteri-synth.kicad_sch)
+* [PCB Design](.attachements/otteri-synth.kicad_pcb)
 
 ## Implementation using Perf Board
 
