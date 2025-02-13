@@ -140,9 +140,11 @@ The first half I printed had way too small dowels. So they ended up breaking whe
 
 So in try 2, I cut the Otter in Bambu Studio, using hexagons dowels with length 2cm and 1.5cm diameter as connectors. Initially I had a small gap between the two pieces. So I manually reduced the length of the dowels and re-printed just these.
 
+**TODO: Add 3mf file of project...**
+
 ## Putting it all together
 
-A first prototype was made with a breadboard and some initial buttons I had still at home. The order for the remaining buttons was on it's way.
+A first circuit prototype was made with a breadboard and some initial buttons I had still at home. The order for the remaining buttons was on it's way.
 
 <img src=".attachements/initial-quick-test.jpg" alt="Otteri DALL-E Image" width="400" height="300">
 
@@ -153,7 +155,7 @@ To fix the plate with the buttons to the body of the synth, I got melt threads i
 In Blender I prepared the matching 4mm holes to fix the threads in.
 <img src=".attachements/m3-melt-thread.png" alt="Otteri DALL-E Image" width="400" height="300">
 
-The first full print was a success (even if the filament ran out and I had to switch to a different color to finish the print). I was able to verify my design and continue with the final HW steps.
+The first full print was a success (even if the filament ran out and I had to switch to a different color to finish the print). I was able to verify my design and continue with the final hardware steps.
 
 <img src=".attachements/otter-full-body.jpg" alt="Otteri DALL-E Image" width="400" >
 
@@ -236,5 +238,4 @@ I'm making heavy use of the [Teensy Audio Library](https://www.pjrc.com/teensy/t
 
 # Demo
 
-*Coming soon...*
-
+A demo of the sounds it makes before it got assambled: [Pre-assembly demo video](.attachements/first-demo.mov)
