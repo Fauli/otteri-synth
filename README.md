@@ -219,7 +219,7 @@ Out of the schematics, I was able to create an initial, simple PCB design.
 
 Because the board was so simple, I ended up using a perf board and did the manual path setup using solder. 
 
-<img src=".attachements/perf-board.jpg" alt="Otteri DALL-E Image" height="50%">
+<img src=".attachements/perf-board.jpg" alt="Otteri DALL-E Image" width="400">
 
 It does not look very nice, but works well and is sturdy.
 
