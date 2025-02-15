@@ -37,7 +37,18 @@ In these modern times I wanted to leverage what new tools have been available to
 
 # Design
 As the base I generated an image using [DALL-E](https://openai.com/index/dall-e-2/) and fed it into [TRELLIS](https://huggingface.co/JeffreyXiang/TRELLIS-image-large).
-I was able to create an image in DALL-E that exactly matched what I had in mind.
+
+The prompt was:
+```bash
+Create a prototype of a synthesizer case.
+White background, it is important that there is no background at all in the image. Should be childrens style, cool design and possible to 3d print on a 3d printer. I want to actually implement the case and use it for a synth project.
+The synth should somewhat look like an otter.
+
+# after some back and forth with some prototypes that had too many hands :P
+There are too many hands, start over with an otter design, surprise me with a new and cool idea
+```
+
+In the end I was able to create an image in DALL-E that exactly matched what I had in mind.
 
 <img src=".attachements/generated-otter-synth.webp" alt="Otteri DALL-E Image" width="300" height="300">
 
@@ -241,4 +252,4 @@ I'm making heavy use of the [Teensy Audio Library](https://www.pjrc.com/teensy/t
 
 # Demo
 
-A demo of the sounds it makes before it got assambled: [Pre-assembly demo video](.attachements/first-demo.mov)
+A demo of the sounds it makes before it got assambled: [Pre-assembly demo video](.attachements/first-demo.mov).
