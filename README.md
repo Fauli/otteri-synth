@@ -25,13 +25,16 @@
   - [Importing Teensy into KiCad](#importing-teensy-into-kicad)
   - [Schematics and PCB design](#schematics-and-pcb-design)
   - [Implementation using Perf Board](#implementation-using-perf-board)
+  - [Ground loop](#ground-loop)
+  - [Finished product](#finished-product)
 - [Software](#software)
 - [Demo](#demo)
+- [Personal conclusion \& learnings](#personal-conclusion--learnings)
 
 
 
 # Introduction
-For fun I wanted to create a synthesizer that looks like an otter. It should be my daughters firsth synth :)
+For fun I wanted to create a synthesizer that looks like an otter. It should be my daughters first synth :)
 
 In these modern times I wanted to leverage what new tools have been available to design this project. In my mind I had a clear vision how the synth should look and play. I never did such a project before, so it was also a learning experience for me.
 
@@ -66,15 +69,18 @@ Because I have a 3d printer, the case and inner works was specially made for thi
 
 Here is a quick overview of the used parts. A detailed description can be found below.
 
-| Part                     | Amount | Description                                      |
-| ------------------------ | ------ | ------------------------------------------------ |
-| 3D Printed Case          | 1      | Custom case to house all components              |
-| Teensy 3.2               | 1      | Microcontroller for handling audio processing    |
-| Teensy Audio Shield      | 1      | Audio processing shield for Teensy               |
-| Adafruit MAX7944         | 1      | Amplifier for driving the speakers               |
-| 4Ohm 3W 40mm Speakers    | 2      | Small speakers for audio output                  |
-| Arcade Buttons           | 10     | Durable buttons for user interaction             |
-| Various Wires            | -      | Wiring for connecting all components             |
+| Part                       | Amount | Description                                   |
+| -------------------------- | ------ | --------------------------------------------- |
+| 3D Printed Case            | 1      | Custom case to house all components           |
+| Teensy 3.2                 | 1      | Microcontroller for handling audio processing |
+| Teensy Audio Shield        | 1      | Audio processing shield for Teensy            |
+| Adafruit MAX7944           | 1      | Amplifier for driving the speakers            |
+| 4Ohm 5W 40mm Speakers      | 2      | Small speakers for audio output               |
+| Arcade Buttons             | 10     | Durable buttons for user interaction          |
+| DC-015 circular power plug | 1      | Power plug for the synth                      |
+| M5Stack Buck Converter 5 V | 1      | 12V to 5V converter for Teensy power          |
+| Ground Loop isolator       | 1      | Prevent hum sound in speaker                  |
+| Various Wires              | -      | Wiring for connecting all components          |
 
 ## Case
 
@@ -126,6 +132,8 @@ Teensy supports 5V power input, the amplifier needs 12V. In order to now have 2 
          +-- Common Ground --------+
 ```
 
+To be able to re-use standard 12V power adapters, I prepared a hole at the back of the synth and added a circular power plug.
+
 ## Wiring diagram
 
 <img src=".attachements/teensy3-audio-pins.png" alt="Otteri DALL-E Image" width="400" height="400">
@@ -169,6 +177,13 @@ In Blender I prepared the matching 4mm holes to fix the threads in.
 The first full print was a success (even if the filament ran out and I had to switch to a different color to finish the print). I was able to verify my design and continue with the final hardware steps.
 
 <img src=".attachements/otter-full-body.jpg" alt="Otteri DALL-E Image" width="400" >
+
+I had to change the speaker because my initial one sounded very bad. The new one had holes on the side to proper fix the speaker to the case.
+
+<img src=".attachements/spaker-holder.png" alt="Otteri DALL-E Image" width="400" >
+
+<img src=".attachements/glued-in-speaker.jpg" alt="Otteri DALL-E Image" width="400" >
+
 
 
 ### KiCad
@@ -239,6 +254,37 @@ It does not look very nice, but works well and is sturdy.
 
 <img src=".attachements/buttons-complete.jpg" alt="Otteri DALL-E Image" width="400" >
 
+Completed plate setup with all buttons attached.
+
+<img src=".attachements/inside-the-otter.jpg" alt="Otter in the otter" width="400" >
+
+Inside of the finished otter.
+
+## Ground loop
+
+After I connected the setup and switched the power supply of the teensy from USB to the stepped down 5V VIN, i had a constant hum on the speakers.
+
+This is called a ground loop. A ground loop occurs when multiple devices share more than one path to ground, creating an unintended loop.
+
+In my case this was the commong ground of the power as well as the audio jack cable.
+
+Top combat this I used a ground loop isolator. This fixed the problem.
+
+<img src=".attachements/ground-loop-isolator.jpg" alt="Ground Loop Isolator" width="400" >
+
+## Finished product
+
+<img src=".attachements/finished-top-view.jpg" alt="Finished Top View" width="400" >
+
+Top view of the synth.
+
+<img src=".attachements/finished-side-view.jpg" alt="Finished Side View" width="400" >
+
+Side view of the synth.
+
+<img src=".attachements/finished-back.jpg" alt="Finished Back View" width="400" >
+
+Back view of the synth, with the power plug.
 
 # Software
 
@@ -253,3 +299,15 @@ I'm making heavy use of the [Teensy Audio Library](https://www.pjrc.com/teensy/t
 # Demo
 
 A demo of the sounds it makes before it got assambled: [Pre-assembly demo video](.attachements/first-demo.mov).
+
+# Personal conclusion & learnings
+
+This project was incredibly rewarding and enjoyable, serving not only as a creative outlet but also as a significant learning experience.
+
+Throughout the process, I deepened my understanding of hardware integration, 3D printing nuances, and audio electronics.
+
+Iterating through multiple prototypes highlighted the importance of adaptability, particularly when refining the 3D design and addressing unexpected technical challenges, such as the ground loop issue.
+
+The synth turned out exactly as envisioned - playful, robust, and inviting to young hands eager to explore music. I'm excited to see how my daughter interacts with the Otteri-synth, and I'm hopeful it sparks a lasting curiosity and joy for music creation.
+
+Future projects are already planned. Next time with more advanced controls and the Teensy 4.1 as controller.
