@@ -27,6 +27,7 @@
   - [Implementation using Perf Board](#implementation-using-perf-board)
   - [Ground loop](#ground-loop)
   - [Finished product](#finished-product)
+    - [Final Project Files](#final-project-files)
 - [Software](#software)
 - [Demo](#demo)
 - [Personal conclusion \& learnings](#personal-conclusion--learnings)
@@ -285,6 +286,10 @@ Side view of the synth.
 <img src=".attachements/finished-back.jpg" alt="Finished Back View" width="400" >
 
 Back view of the synth, with the power plug.
+
+### Final Project Files
+
+You can find the [blender project](.attachements/otteri-synth-v6.blend) and the [3d STL file](.attachements/otteri-synth-v6.stl) in in the repo.
 
 # Software
 
